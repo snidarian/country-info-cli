@@ -67,12 +67,17 @@ args = parser.parse_args()
 
 # makes request to webAPI for country information
 for arg in args.fullname:
-    result = rq.get(f'https://restcountries.eu/rest/v2/name/{arg}?fullText=true')
-    json_payload = result.json()
-    json_payload = json_payload[0]
+    try:
+        result = rq.get(f'https://restcountries.eu/rest/v2/name/{arg}?fullText=true')
+        json_payload = result.json()
+        json_payload = json_payload[0]
+        print_country_information(json_payload)
+    except KeyError:
+        print(red + "Country not found" + reset + ": Check your spelling")
     # calls printing/formatting/highlighting function
     #print(json_payload) # uncomment to print raw json data
-    print_country_information(json_payload)
+    
+    
     
 
 
