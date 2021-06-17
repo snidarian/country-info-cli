@@ -17,8 +17,8 @@ reset = Fore.RESET
 # setup argparse
 parser = argparse.ArgumentParser(description="Query country info")
 
-args = parser.add_argument('--all', '-a', help="Shows all countries and their calling codes")
-args = parser.add_argument('fullname', help="Shows all countries and their calling codes", type=str, nargs='?')
+#args = parser.add_argument('--all', '-a', help="Shows all countries and their calling codes")
+args = parser.add_argument('fullname', help="Shows all countries and their calling codes", type=str, nargs='*')
 
 args = parser.parse_args()
 
@@ -30,11 +30,11 @@ result = rq.get('https://restcountries.eu/rest/v2/all')
 json_payload_list = result.json()
 
 
-
-index = 0
-for country_item in json_payload_list:
-    print(str(index) + '. ' + country_item['name'] + ' - ' + country_item['callingCodes'][0])
-    index+=1
+for arg in args.fullname:
+    result = rq.get(f'https://restcountries.eu/rest/v2/name/{arg}?fullText=true')
+    json_payload = result.json()
+    json_payload = json_payload[0]
+    print(json_payload)
 
 
 
