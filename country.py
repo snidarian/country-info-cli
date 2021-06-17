@@ -1,5 +1,8 @@
 #!/usr/bin/python3
 
+# link to documentation of web api used in this program
+# https://restcountries.eu/#api-endpoints-name
+
 
 import requests as rq
 import random as r
