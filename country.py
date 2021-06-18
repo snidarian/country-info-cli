@@ -44,8 +44,11 @@ def print_country_information(parent_dictionary) -> None:
     print("Currencies:", end=' ')
     for currency in parent_dictionary['currencies']:
         print(green + currency['name'] + reset, end=', ')
-        print(yellow + currency['code'] + reset, end=', ') 
-        print(cyan + currency['symbol'] + reset, end='\n')
+        print(yellow + currency['code'] + reset, end=', ')
+        try:
+            print(cyan + currency['symbol'] + reset, end='\n')
+        except:
+            print("Symbol unavailable.")
     print("link to flag: ", end=''); print(red + parent_dictionary['flag'] + reset)
     
 
